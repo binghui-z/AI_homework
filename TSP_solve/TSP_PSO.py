@@ -3,13 +3,14 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import time
+from utils import run_time
 plt.rcParams["font.sans-serif"] = "SimHei"
 plt.rcParams["axes.unicode_minus"] = False
 
 class PSO(object):
-    def __init__(self, num_city, data):
-        self.iter_max = 500  # 迭代数目
+    def __init__(self, num_city, data, iter=1):
+        self.iter_max = iter  # 迭代数目
         self.num = 200  # 粒子数目
         self.num_city = num_city  # 城市数
         self.location = data # 城市的位置坐标
@@ -214,7 +215,7 @@ class PSO(object):
         return self.location[best_path], best_length
 
 
-def TSP_PSO():
+def TSP_PSO(iter=500):
     data = pd.read_csv('mytsp/china.csv', delimiter=";", header=None).values
 
     data = np.array(data)
@@ -224,9 +225,13 @@ def TSP_PSO():
     # 加上一行因为会回到起点
     show_data = np.vstack([data, data[0]])
 
-    pso = PSO(num_city=data.shape[0], data=data.copy())
+    starttime = time.time()
+    pso = PSO(num_city=data.shape[0], data=data.copy(), iter=iter)
     Best_path, Best = pso.run()
-
+    endtime = time.time()
+    all_time = endtime - starttime
+    run_time._init()
+    run_time.set_value('runtime',all_time)
     Best_path = np.vstack([Best_path, Best_path[0]])
     fig, axs = plt.subplots(2, 1,figsize=(8,10))
     axs[0].plot(data[:, 0], data[:, 1], 'ro')
@@ -246,6 +251,6 @@ def TSP_PSO():
     plt.show()
 
 if __name__ == "__main__":
-    TSP_PSO()
+    TSP_PSO(100)
 
 

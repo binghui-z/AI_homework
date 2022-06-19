@@ -3,14 +3,15 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import time
+from utils import run_time
 plt.rcParams["font.sans-serif"] = "SimHei"
 plt.rcParams["axes.unicode_minus"] = False
 
 from mytsp.DW import Draw
 
 class ACO(object):
-    def __init__(self, num_city, data):
+    def __init__(self, num_city, data, iter=1):
         self.m = 50  # 蚂蚁数量
         self.alpha = 1  # 信息素重要程度因子
         self.beta = 5  # 启发函数重要因子
@@ -21,7 +22,7 @@ class ACO(object):
         self.Tau = np.zeros([num_city, num_city])  # 信息素矩阵
         self.Table = [[0 for _ in range(num_city)] for _ in range(self.m)]  # 生成的蚁群
         self.iter = 1
-        self.iter_max = 500   #迭代次数
+        self.iter_max = iter   #迭代次数
         self.dis_mat = self.compute_dis_mat(num_city, self.location)  # 计算城市之间的距离矩阵
         self.Eta = 10. / self.dis_mat  # 启发式函数
         self.paths = None  # 蚁群中每个个体的长度
@@ -178,7 +179,7 @@ class ACO(object):
         best_length, best_path = self.aco()
         return self.location[best_path], best_length
 
-def TSP_ACO():
+def TSP_ACO(iter=500):
     data = pd.read_csv('mytsp/china.csv', delimiter=";", header=None).values
 
     data = np.array(data)
@@ -187,9 +188,13 @@ def TSP_ACO():
     # 加上一行因为会回到起点
     show_data = np.vstack([data, data[0]])
 
-    aco = ACO(num_city=data.shape[0], data=data.copy())
+    starttime = time.time()
+    aco = ACO(num_city=data.shape[0], data=data.copy(),iter=iter)
     Best_path, Best = aco.run()
-
+    endtime = time.time()
+    all_time = endtime - starttime
+    run_time._init()
+    run_time.set_value('runtime',all_time)
     Best_path = np.vstack([Best_path, Best_path[0]])
 
     fig, axs = plt.subplots(2, 1,figsize=(8,10))
@@ -210,4 +215,4 @@ def TSP_ACO():
     plt.show()
 
 if __name__ == "__main__":
-    TSP_ACO()
+    TSP_ACO(100)

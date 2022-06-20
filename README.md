@@ -7,8 +7,9 @@
 
 
 ## 使用说明
-1. 输入文件的路径，该路径包含预定义的城市坐标（确定/更换）；
-2. 输入每个算法要迭代的次数（确定/清空）。
+1. 双击.exe文件；
+2. 输入文件的路径，该路径包含预定义的城市坐标（确定/更换）；
+3. 输入每个算法要迭代的次数（确定/清空）。
 
 ## 测试
 迭代次数统一设置为500。
@@ -26,6 +27,6 @@
 
 
 ## reference
-1. 感谢 https://github.com/kellenf/TSP_collection 提供了算法思路;
-2. 感谢 https://github.com/WHU-gentle/AI-RomaniaProblem 提供了GUI思路;
+1. 感谢 https://github.com/kellenf/TSP_collection 提供了算法思路；
+2. 感谢 https://github.com/WHU-gentle/AI-RomaniaProblem 提供了GUI思路；
 3. 感谢 https://github.com/425776024/TSP-GA-py 提供了问题的应用场景。

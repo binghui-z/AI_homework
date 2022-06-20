@@ -181,7 +181,10 @@ class ACO(object):
 
 def TSP_ACO(iter=500):
     starttime = time.time()
-    data = pd.read_csv('mytsp/china.csv', delimiter=";", header=None).values
+    
+    locations = global_value.get_value('path') 
+    print(locations)
+    data = pd.read_csv(locations, delimiter=";", header=None).values
 
     data = np.array(data)
     city_name = data[:, 0]

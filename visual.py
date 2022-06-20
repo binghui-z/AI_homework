@@ -30,16 +30,23 @@ def route_length():
     all_lenth.after(200, route_length)
 
 def getEntry():
-    string = entry.get() # 获取Entry的内容
+    string = entry1.get() # 获取Entry的内容
     global_value.set_value('iter',int(string))
 
 def clear():
-    entry.delete(0,'end') # 删除清空Entry控件的内容
+    entry1.delete(0,'end') # 删除清空Entry控件的内容
+
+def getEntry_path():
+    path = entry2.get() # 获取Entry的内容
+    global_value.set_value('path',path)
+
+def clear_path():
+    entry2.delete(0,'end') # 删除清空Entry控件的内容
     
 if __name__ == "__main__":
     #? inital 
     root = Tk()  # 父容器 
-    root.geometry('800x400')  # 宽x高+偏移量
+    root.geometry('1000x600')  # 宽x高+偏移量
     root.title('祖国那么大，我想去看看')
 
     frame1 = Frame(root, bd=4)
@@ -68,17 +75,28 @@ if __name__ == "__main__":
     all_lenth.grid(row=1, column=0)
     route_length()
 
+    # 路径
+    label2 = Label(root,text='请输入城市坐标',font=("none", 15, "bold"),height=1)
+    label2.pack(side=LEFT)
+    entry2 = Entry(root,font=("none", 15, "bold"))
+    entry2.pack(side=LEFT)
+    button03 = Button(root,text='确定',font=("none", 15, "bold"),command=getEntry_path).place(x=230, y=320)
+    button04 = Button(root,text='更换',font=("none", 15, "bold"), command=clear_path).place(x=330, y=320)
+
+    # 迭代次数
     label = Label(root,text='请输入迭代次数',font=("none", 15, "bold"),height=1)
     label.pack(side=LEFT)
-    entry = Entry(root,font=("none", 15, "bold"))
-    entry.pack(side=LEFT) 
-    button01 = Button(root,text='确定',font=("none", 15, "bold"),command=getEntry).place(x=500, y=180)
-    button02 = Button(root,text='清空',font=("none", 15, "bold"), command=clear).place(x=600, y=180)
+    entry1 = Entry(root,font=("none", 15, "bold"))
+    entry1.pack(side=LEFT) 
+    button01 = Button(root,text='确定',font=("none", 15, "bold"),command=getEntry).place(x=700, y=320)
+    button02 = Button(root,text='清空',font=("none", 15, "bold"), command=clear).place(x=800, y=320)
+
+
 
     #? 选择算法
-    BBestFirst = Button(root, text="GA", font=("none", 15, "bold"), width=10, command=TSP_GA).place(x=30, y=230)
-    BBestSecond = Button(root, text="ACO", font=("none", 15, "bold"), width=10, command=TSP_ACO).place(x=330, y=230)
-    BBestThird = Button(root, text="PSO", font=("none", 15, "bold"),  width=10, command=TSP_PSO).place(x=630, y=230)
+    BBestFirst = Button(root, text="GA", font=("none", 15, "bold"), width=10, command=TSP_GA).place(x=30, y=430)
+    BBestSecond = Button(root, text="ACO", font=("none", 15, "bold"), width=10, command=TSP_ACO).place(x=330, y=430)
+    BBestThird = Button(root, text="PSO", font=("none", 15, "bold"),  width=10, command=TSP_PSO).place(x=630, y=430)
 
     root.mainloop()
 

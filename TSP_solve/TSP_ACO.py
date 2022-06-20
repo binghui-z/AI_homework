@@ -181,7 +181,7 @@ class ACO(object):
 
 def TSP_ACO(iter=500):
     starttime = time.time()
-    
+
     locations = global_value.get_value('path') 
     print(locations)
     data = pd.read_csv(locations, delimiter=";", header=None).values
@@ -206,12 +206,12 @@ def TSP_ACO(iter=500):
 
     Best_path = np.vstack([Best_path, Best_path[0]])
     axs[0].plot(Best_path[:, 0], Best_path[:, 1])
-    axs[0].set_title('aco_final')
+    axs[0].set_title('ACO_result')
 
     iterations = aco.iter_x
     best_record = aco.iter_y
     axs[1].plot(iterations, best_record)
-    axs[1].set_title('cue')
+    axs[1].set_title('Cue')
 
     endtime = time.time()
     all_time = endtime - starttime

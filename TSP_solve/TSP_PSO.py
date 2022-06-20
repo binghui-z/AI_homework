@@ -217,7 +217,7 @@ class PSO(object):
 
 def TSP_PSO(iter=500):
     starttime = time.time()
-    
+
     locations = global_value.get_value('path') 
     print(locations)
     data = pd.read_csv(locations, delimiter=";", header=None).values
@@ -243,12 +243,12 @@ def TSP_PSO(iter=500):
 
     Best_path = np.vstack([Best_path, Best_path[0]])
     axs[0].plot(Best_path[:, 0], Best_path[:, 1])
-    axs[0].set_title('aco_final')
+    axs[0].set_title('PSO_result')
 
     iterations = pso.iter_x
     best_record = pso.iter_y
     axs[1].plot(iterations, best_record)
-    axs[1].set_title('cue')
+    axs[1].set_title('Cue')
     
     endtime = time.time()
     all_time = endtime - starttime

@@ -292,12 +292,12 @@ def TSP_GA(iter=500):
 
     Best_path = np.vstack([Best_path, Best_path[0]])
     axs[0].plot(Best_path[:, 0], Best_path[:, 1])
-    axs[0].set_title('aco_final')
+    axs[0].set_title('GA_result')
 
     iterations = ga.iter_x
     best_record = ga.iter_y
     axs[1].plot(iterations, best_record)
-    axs[1].set_title('cue')
+    axs[1].set_title('Cue')
 
     endtime = time.time()
     all_time = endtime - starttime

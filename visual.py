@@ -1,10 +1,10 @@
 from datetime import datetime
 from tkinter import *
+import psutil
 import sys
 from TSP_solve.TSP_ACO import TSP_ACO
 from TSP_solve.TSP_GA import TSP_GA
 from TSP_solve.TSP_PSO import TSP_PSO
-# import torch
 sys.setrecursionlimit(10000)
 from TSP_solve.utils import global_value
 global_value._init()
@@ -15,8 +15,8 @@ def tick():
     clock.after(200, tick)
 
 def device():
-    txt = 'cuda'# if torch.cuda.is_available() else 'cpu'
-    hardware.config(text="当前设备为："+txt)
+    memory_use_percent = str(psutil.virtual_memory().percent)+' %'
+    hardware.config(text="内存占用率："+memory_use_percent)
     hardware.after(200, device)
 
 def running_time():
@@ -76,9 +76,9 @@ if __name__ == "__main__":
     button02 = Button(root,text='清空',font=("none", 15, "bold"), command=clear).place(x=600, y=180)
 
     #? 选择算法
-    BBestFirst = Button(root, text="GA", font=("none", 15, "bold"), width=10, height=2, command=TSP_GA).place(x=30, y=230)
-    BBestSecond = Button(root, text="ACO", font=("none", 15, "bold"), width=10, height=2, command=TSP_ACO).place(x=330, y=230)
-    BBestThird = Button(root, text="PSO", font=("none", 15, "bold"),  width=10, height=2, command=TSP_PSO).place(x=630, y=230)
+    BBestFirst = Button(root, text="GA", font=("none", 15, "bold"), width=10, command=TSP_GA).place(x=30, y=230)
+    BBestSecond = Button(root, text="ACO", font=("none", 15, "bold"), width=10, command=TSP_ACO).place(x=330, y=230)
+    BBestThird = Button(root, text="PSO", font=("none", 15, "bold"),  width=10, command=TSP_PSO).place(x=630, y=230)
 
     root.mainloop()
 

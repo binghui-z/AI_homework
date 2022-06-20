@@ -217,7 +217,7 @@ class PSO(object):
 
 def TSP_PSO(iter=500):
     starttime = time.time()
-    data = pd.read_csv('C:/Users/14360/Desktop/AI_homework/mytsp/china.csv', delimiter=";", header=None).values
+    data = pd.read_csv('mytsp/china.csv', delimiter=";", header=None).values
 
     data = np.array(data)
     city_name = data[:, 0]

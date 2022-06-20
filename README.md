@@ -12,9 +12,8 @@
 
 ## 测试
 迭代次数统一设置为500
-
 <div align=center>
-<img src="/figure/resuslt.png" />
+<img src="/figure/result.png" />
 </div>
 
 ## 打包为exe

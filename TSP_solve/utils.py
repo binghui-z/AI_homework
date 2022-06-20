@@ -1,4 +1,4 @@
-class run_time:
+class global_value:
     
     def _init():#初始化
         global _global_dict

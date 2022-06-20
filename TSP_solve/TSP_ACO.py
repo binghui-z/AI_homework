@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import time
-from utils import run_time
+from TSP_solve.utils import global_value
 plt.rcParams["font.sans-serif"] = "SimHei"
 plt.rcParams["axes.unicode_minus"] = False
 
@@ -180,21 +180,18 @@ class ACO(object):
         return self.location[best_path], best_length
 
 def TSP_ACO(iter=500):
-    data = pd.read_csv('mytsp/china.csv', delimiter=";", header=None).values
+    starttime = time.time()
+    data = pd.read_csv('C:/Users/14360/Desktop/AI_homework/mytsp/china.csv', delimiter=";", header=None).values
 
     data = np.array(data)
     city_name = data[:, 0]
     data = data[:, 1:]
     # 加上一行因为会回到起点
     show_data = np.vstack([data, data[0]])
-
-    starttime = time.time()
+    iter = global_value.get_value('iter') 
     aco = ACO(num_city=data.shape[0], data=data.copy(),iter=iter)
     Best_path, Best = aco.run()
-    endtime = time.time()
-    all_time = endtime - starttime
-    run_time._init()
-    run_time.set_value('runtime',all_time)
+
     Best_path = np.vstack([Best_path, Best_path[0]])
 
     fig, axs = plt.subplots(2, 1,figsize=(8,10))
@@ -212,6 +209,13 @@ def TSP_ACO(iter=500):
     best_record = aco.iter_y
     axs[1].plot(iterations, best_record)
     axs[1].set_title('cue')
+
+    endtime = time.time()
+    all_time = endtime - starttime
+    global_value._init()
+    global_value.set_value('runtime',all_time)
+    global_value.set_value('length',Best)
+
     plt.show()
 
 if __name__ == "__main__":
